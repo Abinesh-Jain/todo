@@ -10,9 +10,12 @@ class Strings {
   static const password = 'Password';
   static const signUp = 'Sign Up';
   static const dashboard = 'Dashboard';
+  static const taskCategories = 'Task Categories';
   static const scheduledTasks = 'Scheduled Tasks';
   static const completedTasks = 'Completed Tasks';
   static const withHeldTasks = 'With-held Tasks';
+  static const taskOverview = 'Task Overview';
+  static const untitledTask = 'Untitled Task';
   static const addTask = 'Add Task';
   static const createTask = 'Create Task';
   static const editTask = 'Edit Task';
@@ -50,4 +53,16 @@ class Strings {
   static const establishedOn = 'Established on';
   static const gradesPresentInTheSchool = 'Grades Present in the School';
   static const finish = 'Finish';
+  static const refreshTasks = 'Refresh Tasks';
+  static const enterValidEmail = 'Please enter a valid email address';
+  static const mustBe8characters = 'must be at least 8 characters';
+  static const mustContainUppercase =
+      'must contain at least one uppercase letter';
+  static const mustContainLowercase =
+      'must contain at least one lowercase letter';
+  static const mustContainNumber = 'must contain at least one number';
+  static const mustContainSpecialCharacter =
+      'must contain at least one special character';
+  static const home = 'Home';
+  static const settings = 'Settings';
 }

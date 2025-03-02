@@ -31,6 +31,27 @@ class Task {
     this.generalData = const GeneralData(),
   });
 
+  factory Task.fromJSON(json) => Task(
+        id: json['id'] as String?,
+        title: json['title'] as String?,
+        assignTo: json['assignTo'] as String?,
+        priority: json['priority'] as String?,
+        createdBy: json['createdBy'] as String?,
+        division: json['division'] as String?,
+        description: json['description'] as String?,
+        taskStatus: json['taskStatus'] as String?,
+        complete: (json['complete'] as num?)?.toDouble(),
+        group: json['group'] as String?,
+        startDate: json['startDate'] != null
+            ? DateTime.tryParse(json['startDate'])
+            : null,
+        dueDate:
+            json['dueDate'] != null ? DateTime.tryParse(json['dueDate']) : null,
+        generalData: json['generalData'] != null
+            ? GeneralData.fromJSON(json['generalData'])
+            : const GeneralData(),
+      );
+
   Task copyWith({
     String? id,
     String? title,

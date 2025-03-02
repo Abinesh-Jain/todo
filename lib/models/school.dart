@@ -13,6 +13,16 @@ class School {
     this.grades,
   });
 
+  factory School.fromJSON(json) => School(
+        name: json?['name'],
+        type: json?['type'],
+        curriculum: json?['curriculum'],
+        establishedOn: json?['establishedOn'] != null
+            ? DateTime.tryParse('${json?['establishedOn']}')
+            : null,
+        grades: json?['grades'],
+      );
+
   School copyWith({
     String? name,
     String? type,
@@ -35,4 +45,13 @@ class School {
         'establishedOn': establishedOn?.toString(),
         'grades': grades,
       };
+
+  bool get isValid {
+    final isNull = [name, type, curriculum, establishedOn, grades]
+        .any((element) => element == null);
+    if (isNull) return false;
+    final isEmpty = [curriculum, grades].any((element) => element!.isEmpty);
+    if (isEmpty) return false;
+    return true;
+  }
 }

@@ -11,6 +11,14 @@ class GeneralData {
     this.schools,
   });
 
+  factory GeneralData.fromJSON(json) => GeneralData(
+        area: json?['area'],
+        numberOfSchools: json?['numberOfSchools'],
+        schools: (json?['schools'] as List?)
+            ?.map((school) => School.fromJSON(school))
+            .toList(),
+      );
+
   GeneralData copyWith({
     String? area,
     int? numberOfSchools,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../models/task.dart';
 import 'task_page.variable.dart';
 
 class TaskPageController extends GetxController with TaskPageVariable {
   @override
   void onInit() {
     super.onInit();
-    task = Get.arguments;
+    task = Get.arguments ?? Task();
   }
 
   void onSavePressed() {
@@ -16,19 +17,9 @@ class TaskPageController extends GetxController with TaskPageVariable {
     if (valid) {
       Get
         ..back(result: task)
-        ..snackbar(
-          'Saved successfully !',
-          'Task saved successfully',
-          backgroundColor: Colors.greenAccent,
-          maxWidth: Get.width * 0.25,
-        );
+        ..snackbar('Saved successfully !', 'Task saved successfully');
     } else {
-      Get.snackbar(
-        'Task not valid !',
-        'Please correct the errors',
-        backgroundColor: Colors.redAccent,
-        maxWidth: Get.width * 0.25,
-      );
+      Get.snackbar('Task not valid !', 'Please correct the errors');
     }
   }
 }

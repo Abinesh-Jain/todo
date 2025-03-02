@@ -10,6 +10,7 @@ class DateFormField extends StatelessWidget {
     this.label,
     this.onChanged,
     this.required = true,
+    this.onSaved,
   }) : controller = TextEditingController(
             text: initialValue != null
                 ? initialValue.toLocal().toString().split(' ')[0]
@@ -24,6 +25,8 @@ class DateFormField extends StatelessWidget {
   final bool required;
 
   final TextEditingController controller;
+
+  final FormFieldSetter<DateTime>? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,7 @@ class DateFormField extends StatelessWidget {
         ).then((value) {
           value != null
               ? controller.text = value.toLocal().toString().split(' ')[0]
-              : controller.clear();
+              : null;
           onChanged?.call(value);
         });
       },
@@ -65,6 +68,10 @@ class DateFormField extends StatelessWidget {
           return label != null ? '$label is required' : null;
         }
         return null;
+      },
+      onSaved: (newValue) {
+        final date = DateTime.tryParse('$newValue');
+        onSaved?.call(date);
       },
     );
   }

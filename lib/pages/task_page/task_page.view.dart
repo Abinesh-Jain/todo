@@ -14,7 +14,19 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
   @override
   Widget? builder() {
     return Scaffold(
-      appBar: AppBar(title: const Text(Strings.createTask)),
+      appBar: AppBar(
+        title: const Text(Strings.createTask),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) => [
+              const PopupMenuItem(child: Text(Strings.home)),
+              const PopupMenuItem(child: Text(Strings.settings)),
+              const PopupMenuItem(child: Text(Strings.logout)),
+            ],
+            icon: const Icon(Icons.person),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -82,8 +94,9 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                                   ),
                                   onChanged: (value) {
                                     final task = controller.task ?? Task();
-                                    task.copyWith(assignTo: value);
-                                    controller.task = task;
+                                    final newTask =
+                                        task.copyWith(assignTo: value);
+                                    controller.task = newTask;
                                   },
                                   validator: (value) {
                                     if (value == null) {
@@ -118,8 +131,9 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                                   ),
                                   onChanged: (value) {
                                     final task = controller.task ?? Task();
-                                    task.copyWith(priority: value);
-                                    controller.task = task;
+                                    final newTask =
+                                        task.copyWith(priority: value);
+                                    controller.task = newTask;
                                   },
                                   validator: (value) {
                                     if (value == null) {
@@ -153,8 +167,9 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                                   ),
                                   onChanged: (value) {
                                     final task = controller.task ?? Task();
-                                    task.copyWith(createdBy: value);
-                                    controller.task = task;
+                                    final newTask =
+                                        task.copyWith(createdBy: value);
+                                    controller.task = newTask;
                                   },
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
@@ -183,8 +198,9 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                                   ),
                                   onChanged: (value) {
                                     final task = controller.task ?? Task();
-                                    task.copyWith(division: value);
-                                    controller.task = task;
+                                    final newTask =
+                                        task.copyWith(division: value);
+                                    controller.task = newTask;
                                   },
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
@@ -225,6 +241,12 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                               expands: true,
                               keyboardType: TextInputType.multiline,
                               textAlignVertical: TextAlignVertical.top,
+                              onChanged: (value) {
+                                final task = controller.task ?? Task();
+                                final newTask =
+                                    task.copyWith(description: value);
+                                controller.task = newTask;
+                              },
                             ),
                           ),
                         ],
@@ -256,7 +278,11 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                                 ),
                               ),
                             ),
-                            onChanged: (value) {},
+                            onChanged: (value) {
+                              final task = controller.task ?? Task();
+                              final newTask = task.copyWith(taskStatus: value);
+                              controller.task = newTask;
+                            },
                             validator: (value) {
                               if (value == null) {
                                 return '${Strings.taskStatus} ${Strings.isRequired}';
@@ -268,6 +294,11 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                           SliderFormField(
                             initialValue: controller.task?.complete,
                             label: Strings.complete,
+                            onChanged: (value) {
+                              final task = controller.task ?? Task();
+                              final newTask = task.copyWith(complete: value);
+                              controller.task = newTask;
+                            },
                           ),
                           const SizedBox(height: 10),
                           DropdownButtonFormField(
@@ -291,7 +322,11 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                                 ),
                               ),
                             ),
-                            onChanged: (value) {},
+                            onChanged: (value) {
+                              final task = controller.task ?? Task();
+                              final newTask = task.copyWith(group: value);
+                              controller.task = newTask;
+                            },
                             validator: (value) {
                               if (value == null) {
                                 return '${Strings.group} ${Strings.isRequired}';
@@ -303,13 +338,21 @@ class TaskPageView extends GetResponsiveView<TaskPageController> {
                           DateFormField(
                             initialValue: controller.task?.startDate,
                             label: Strings.startDate,
-                            onChanged: (value) {},
+                            onChanged: (value) {
+                              final task = controller.task ?? Task();
+                              final newTask = task.copyWith(startDate: value);
+                              controller.task = newTask;
+                            },
                           ),
                           const SizedBox(height: 10),
                           DateFormField(
                             initialValue: controller.task?.dueDate,
                             label: Strings.dueDate,
-                            onChanged: (value) {},
+                            onChanged: (value) {
+                              final task = controller.task ?? Task();
+                              final newTask = task.copyWith(dueDate: value);
+                              controller.task = newTask;
+                            },
                           ),
                         ],
                       ),

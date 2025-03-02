@@ -9,12 +9,14 @@ class ChipsFormField<T> extends StatelessWidget {
     this.label,
     this.initialValue,
     this.required = true,
+    this.onSaved,
   });
 
   final List<T>? initialValue;
   final String? label;
   final List<T> options;
   final bool required;
+  final FormFieldSetter<List<T>>? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class ChipsFormField<T> extends StatelessWidget {
               .toList(),
         ),
       ),
+      onSaved: onSaved,
     );
   }
 }
