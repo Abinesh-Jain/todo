@@ -23,6 +23,7 @@ jobs:
           git remote remove origin
           git remote add origin https://github.com/${{ github.repository }}.git
           git fetch --all
+          git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
 
       - name: Setup Flutter
         run: |
