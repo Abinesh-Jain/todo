@@ -15,6 +15,14 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Fix Git Remote
+        run: |
+          git remote remove origin
+          git remote add origin https://github.com/${{ github.repository }}.git
+          git fetch --all
 
       - name: Setup Flutter
         run: |
