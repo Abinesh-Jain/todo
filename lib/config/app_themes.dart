@@ -22,6 +22,7 @@ class AppThemes {
       labelStyle: AppTextThemes.textTheme.bodyMedium?.copyWith(
         color: AppColors.darkGreen,
       ),
+      hintStyle: const TextStyle(color: Colors.black),
     ),
     dropdownMenuTheme: const DropdownMenuThemeData(menuStyle: MenuStyle()),
   );

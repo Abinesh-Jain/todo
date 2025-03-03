@@ -13,6 +13,7 @@ class App extends StatelessWidget {
       initialRoute: Routes.login,
       getPages: Routes.getPages,
       theme: AppThemes.light,
+      darkTheme: AppThemes.light,
     );
   }
 }
