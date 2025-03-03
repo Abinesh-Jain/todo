@@ -53,6 +53,8 @@ class LoginPageController extends GetxController with LoginPageVariable {
     isSignIn.toggle();
   }
 
+  /// The `onFormSubmitted` function unfocuses the primary focus, validates the form, and either signs in
+  /// or signs up based on the validation result.
   void onFormSubmitted() {
     primaryFocus?.unfocus();
     final valid = authForm.currentState?.validate() ?? false;
@@ -63,6 +65,9 @@ class LoginPageController extends GetxController with LoginPageVariable {
     }
   }
 
+  /// The `signIn` function attempts to sign in a user with the provided email and password, displaying a
+  /// success message and navigating to the dashboard upon successful login, or displaying an error
+  /// message if the login fails.
   void signIn() async {
     final result = await auth.signIn(
       email.text.trim(),
@@ -76,6 +81,8 @@ class LoginPageController extends GetxController with LoginPageVariable {
     }
   }
 
+  /// The `signUp` function handles user sign up process, displaying success or failure messages using
+  /// GetX package in Dart.
   void signUp() async {
     final result = await auth.signUp(
       email.text.trim(),

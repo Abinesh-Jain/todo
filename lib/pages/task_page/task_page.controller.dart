@@ -11,6 +11,8 @@ class TaskPageController extends GetxController with TaskPageVariable {
     task = Get.arguments ?? Task();
   }
 
+  /// The `onSavePressed` function unfocuses the primary focus, validates a form, and shows a success or
+  /// error message using GetX in Dart.
   void onSavePressed() {
     primaryFocus?.unfocus();
     final valid = formKey.currentState?.validate() ?? false;

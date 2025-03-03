@@ -16,6 +16,7 @@ class DashboardPageController extends GetxController
     });
   }
 
+  /// The function `onCategorySelected` updates the list of tasks based on the selected category index.
   void onCategorySelected(int index) {
     category.value = index;
     switch (index) {
@@ -34,6 +35,8 @@ class DashboardPageController extends GetxController
     }
   }
 
+  /// The `onStartTaskPressed` function navigates to the task commencement screen with the selected task
+  /// and refreshes the tasks upon completion.
   void onStartTaskPressed(int index) {
     Get.toNamed(
       Routes.taskCommencement,
@@ -41,11 +44,15 @@ class DashboardPageController extends GetxController
     )?.then((value) => refreshTasks());
   }
 
+  /// The `refreshTasks` function updates the tasks list with data from Hive and resets the category value
+  /// to 0.
   void refreshTasks() {
     tasks.value = hive.getTasks();
     category.value = 0;
   }
 
+  /// This function navigates to the task screen, passes the user's name as an argument, and adds the
+  /// created task to the list of tasks and a Hive database.
   void onAddTaskPressed() {
     Get.toNamed(
       Routes.task,
@@ -58,6 +65,8 @@ class DashboardPageController extends GetxController
     });
   }
 
+  /// The `onEditTaskPressed` function navigates to the task screen, updates the task if a new task is
+  /// returned, and updates the task in a Hive database.
   void onEditTaskPressed(int index) {
     Get.toNamed(
       Routes.task,
@@ -72,6 +81,8 @@ class DashboardPageController extends GetxController
     );
   }
 
+  /// The `onDeleteTaskPressed` function displays a confirmation dialog to delete a task and removes it
+  /// from the list of tasks if confirmed.
   void onDeleteTaskPressed(int index) {
     final task = tasks[index];
     Get.defaultDialog(
@@ -87,6 +98,7 @@ class DashboardPageController extends GetxController
     );
   }
 
+  /// The `logout` function displays a confirmation dialog and logs the user out if confirmed.
   void logout() {
     Get.defaultDialog(
       title: 'Logout ?',

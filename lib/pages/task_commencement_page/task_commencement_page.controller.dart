@@ -40,6 +40,7 @@ class TaskCommencementPageController extends GetxController
     return null;
   }
 
+  /// The function `onAddDataPressed` validates and adds general data including schools to a task in Dart.
   void onAddDataPressed() {
     primaryFocus?.unfocus();
     final valid = generalDataForm.currentState?.validate() ?? false;
@@ -64,6 +65,8 @@ class TaskCommencementPageController extends GetxController
     }
   }
 
+  /// The `onFinishPressed` function unfocuses the primary focus, validates and saves the school overview
+  /// form, and displays a snack bar message based on the form's validity.
   void onFinishPressed() {
     primaryFocus?.unfocus();
     final valid = schoolOverviewForm.currentState?.validate() ?? false;
@@ -75,6 +78,8 @@ class TaskCommencementPageController extends GetxController
     }
   }
 
+  /// The `onSaved` function updates a selected school with new information and calculates completion
+  /// percentage based on valid schools.
   void onSaved(School? school) {
     final selectedSchool = schools[page.value!];
     final newSchool = selectedSchool.copyWith(
