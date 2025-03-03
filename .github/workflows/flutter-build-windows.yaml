@@ -31,7 +31,7 @@ jobs:
       run: flutter build windows
 
     - name: Verify Windows Build Output
-      run: dir /B /S build/windows/x64/runner/Release
+      run: Get-ChildItem -Path build/windows/x64/runner/Release -Recurse
 
     - name: Install Inno Setup
       run: choco install -y innosetup
