@@ -10,5 +10,7 @@ class AppTextThemes {
       fontSize: 16,
       fontWeight: FontWeight.normal,
     ),
+    bodyLarge: TextStyle(color: Colors.black),
+    titleMedium: TextStyle(color: Colors.black),
   );
 }
