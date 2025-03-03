@@ -55,7 +55,7 @@ jobs:
       run: iscc installer.iss
 
     - name: List Generated Files
-      run: dir /B /S .
+      run: Get-ChildItem -Path . -Recurse -Force
 
     - name: Upload Windows Installer
       uses: actions/upload-artifact@v4
