@@ -1,4 +1,4 @@
-name: Build Windows EXE
+name: Build Windows EXE and Installer
 
 on:
   push:
@@ -30,8 +30,35 @@ jobs:
     - name: Build Windows EXE
       run: flutter build windows
 
-    - name: Upload Windows Executable
+    - name: Verify Windows Build Output
+      run: dir /B /S build/windows/x64/runner/Release
+
+    - name: Install Inno Setup
+      run: choco install -y innosetup
+
+    - name: Create Inno Setup Script
+      run: |
+        echo '[Setup]' > installer.iss
+        echo 'AppName=${{ github.event.repository.name }}' >> installer.iss
+        echo 'AppVersion=1.0' >> installer.iss
+        echo 'DefaultDirName={pf}\${{ github.event.repository.name }}' >> installer.iss
+        echo 'OutputDir=.' >> installer.iss
+        echo 'OutputBaseFilename=${{ github.event.repository.name }}' >> installer.iss
+        echo '[Files]' >> installer.iss
+        echo 'Source: "build/windows/x64/runner/Release/*"; DestDir: "{app}"; Flags: recursesubdirs' >> installer.iss
+        echo '[Icons]' >> installer.iss
+        echo 'Name: "{group}\${{ github.event.repository.name }}"; Filename: "{app}\${{ github.event.repository.name }}.exe"' >> installer.iss
+        echo '[Run]' >> installer.iss
+        echo 'Filename: "{app}\${{ github.event.repository.name }}.exe"; Description: "Launch ${{ github.event.repository.name }}"; Flags: nowait postinstall skipifsilent' >> installer.iss
+
+    - name: Build Installer
+      run: iscc installer.iss
+
+    - name: List Generated Files
+      run: dir /B /S .
+
+    - name: Upload Windows Installer
       uses: actions/upload-artifact@v4
       with:
-        name: app-windows-exe
-        path: build\windows\x64\runner\Release\*.exe
+        name: windows-installer
+        path: ./${{ github.event.repository.name }}.exe
